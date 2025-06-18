@@ -22,7 +22,7 @@ import {
   InputGroup,
   InputLeftAddon,
 } from "@chakra-ui/react"
-
+import images from './image.png'
 function Registeration() {
   const [formData, setFormData] = useState({
     name: "",
@@ -139,7 +139,7 @@ function Registeration() {
           <VStack spacing={4} mb={8}>
             <HStack spacing={4} align="center">
               <Image
-                src="/placeholder.svg?height=80&width=80"
+                src={images}
                 alt="Hare Krishna Movement Logo"
                 boxSize="80px"
                 borderRadius="full"
