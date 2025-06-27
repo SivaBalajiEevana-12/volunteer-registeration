@@ -82,7 +82,7 @@ function Registeration() {
       try {
         const dataToSend = {
           ...formData,
-          whatsappNumber: `91${formData.whatsappNumber}`,
+          whatsappNumber: `${formData.whatsappNumber}`,
         }
 
         const response = await fetch("https://vrc-server-production.up.railway.app/user", {
