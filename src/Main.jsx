@@ -72,7 +72,7 @@ const Main = () => {
     if (!validateForm()) return;
 
     try {
-      const orderRes = await fetch("http://localhost:3300/api/create-order", {
+      const orderRes = await fetch("https://vrc-server-110406681774.asia-south1.run.app/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: parseInt(formData.amount) }),
@@ -90,7 +90,7 @@ const Main = () => {
         order_id: orderData.id,
         handler: async (response) => {
           try {
-            const verifyRes = await fetch("http://localhost:3300/api/verify-payment", {
+            const verifyRes = await fetch("https://vrc-server-110406681774.asia-south1.run.app/api/verify-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
