@@ -12,11 +12,16 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import Registeration from './Registeration';
+import Main from './Main';
+import {Routes,Route} from 'react-router-dom'
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Registeration/> 
+      <Routes>
+        <Route path='/vrm' element={<Registeration/>}/>
+      <Route path='/register' element={<Main/>}/>
+      </Routes> 
     </ChakraProvider>
   );
 }
