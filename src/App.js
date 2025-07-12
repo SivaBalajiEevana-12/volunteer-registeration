@@ -25,9 +25,9 @@ function App() {
     <ChakraProvider theme={theme}>
       <Routes>
         <Route path='/vrm' element={<Registeration/>}/>
-      <Route path='/register' element={<Main/>}/>
-      <Route path='/college' element={<CollegeManager/>}/>
-      <Route path='/thankyou' element= {<ThankYou/>}/>
+      <Route path='/' element={<Main/>}/>
+      <Route path='/admin/college' element={<CollegeManager/>}/>
+      <Route path='/thankyou' element= {<ThankYou />}/>
       <Route path='/attendence' element= {<Attendence/>}/>
       <Route path='/admin' element={<CandidateExport/>}/>
       <Route path='/admin/attendance' element={<AttendanceList/>}/>

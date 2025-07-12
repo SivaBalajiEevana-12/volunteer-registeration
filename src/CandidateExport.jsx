@@ -11,6 +11,10 @@ import {
   Td,
   Button,
   Spinner,
+  Input,
+  Flex,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
@@ -19,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 const CandidateExport = () => {
   const [data, setData] = useState([]);
   const [filteredCollege, setFilteredCollege] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -35,9 +41,25 @@ const CandidateExport = () => {
       });
   }, []);
 
-  const filteredData = filteredCollege
-    ? data.filter((c) => c.college === filteredCollege)
-    : data;
+  const filterByDate = (candidate) => {
+    if (!startDate && !endDate) return true;
+
+    const candidateDate = new Date(candidate.registrationDate);
+    const start = startDate ? new Date(startDate) : null;
+    const end = endDate
+      ? new Date(new Date(endDate).setHours(23, 59, 59, 999))
+      : null;
+
+    if (start && candidateDate < start) return false;
+    if (end && candidateDate > end) return false;
+    return true;
+  };
+
+  const filteredData = data.filter((c) => {
+    const collegeMatch = filteredCollege ? c.college === filteredCollege : true;
+    const dateMatch = filterByDate(c);
+    return collegeMatch && dateMatch;
+  });
 
   const uniqueColleges = [...new Set(data.map((c) => c.college))];
 
@@ -50,6 +72,7 @@ const CandidateExport = () => {
         Phone: row.whatsappNumber,
         PaymentStatus: row.paymentStatus,
         Attendance: row.attendance ? "Yes" : "No",
+        RegistrationDate: new Date(row.registrationDate).toLocaleDateString(),
       }))
     );
 
@@ -68,9 +91,7 @@ const CandidateExport = () => {
   };
 
   if (loading)
-    return (
-      <Spinner size="xl" mt="20" ml="auto" mr="auto" display="block" />
-    );
+    return <Spinner size="xl" mt="20" ml="auto" mr="auto" display="block" />;
 
   return (
     <Box p={6}>
@@ -81,18 +102,40 @@ const CandidateExport = () => {
         </Button>
       </Box>
 
-      <Select
-        placeholder="Filter by College"
-        mb={4}
-        onChange={(e) => setFilteredCollege(e.target.value)}
-        value={filteredCollege}
-      >
-        {uniqueColleges.map((college, i) => (
-          <option key={i} value={college}>
-            {college}
-          </option>
-        ))}
-      </Select>
+      <Flex gap={6} mb={4} wrap="wrap">
+        <FormControl width="200px">
+          <FormLabel>Filter by College</FormLabel>
+          <Select
+            placeholder="Select College"
+            onChange={(e) => setFilteredCollege(e.target.value)}
+            value={filteredCollege}
+          >
+            {uniqueColleges.map((college, i) => (
+              <option key={i} value={college}>
+                {college}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl width="200px">
+          <FormLabel>From Date</FormLabel>
+          <Input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </FormControl>
+
+        <FormControl width="200px">
+          <FormLabel>To Date</FormLabel>
+          <Input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </FormControl>
+      </Flex>
 
       <Button colorScheme="teal" mb={4} onClick={exportToExcel}>
         Export to Excel
@@ -106,7 +149,7 @@ const CandidateExport = () => {
             <Th>College</Th>
             <Th>Phone</Th>
             <Th>Payment</Th>
-            {/* <Th>Attendance</Th> */}
+            <Th>Registration Date</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -117,7 +160,11 @@ const CandidateExport = () => {
               <Td>{candidate.college}</Td>
               <Td>{candidate.whatsappNumber}</Td>
               <Td>{candidate.paymentStatus}</Td>
-              {/* <Td>{candidate.attendance ? "✅" : "❌"}</Td> */}
+              <Td>
+                {candidate.registrationDate
+                  ? new Date(candidate.registrationDate).toLocaleDateString()
+                  : "N/A"}
+              </Td>
             </Tr>
           ))}
         </Tbody>

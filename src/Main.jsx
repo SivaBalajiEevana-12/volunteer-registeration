@@ -18,11 +18,9 @@ import Select from "react-select";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Main = () => {
   const toast = useToast();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -37,7 +35,7 @@ const Main = () => {
     course: "",
     year: "",
     dob: "",
-    amount: "9900", // ₹99.00
+    amount: "9900",
   });
 
   const [errors, setErrors] = useState({});
@@ -45,7 +43,7 @@ const Main = () => {
   useEffect(() => {
     const fetchColleges = async () => {
       try {
-        const res = await axios.get("https://vrc-server-110406681774.asia-south1.run.app/college"); // Replace with actual URL
+        const res = await axios.get("https://vrc-server-110406681774.asia-south1.run.app/college");
         const options = res.data.map((college) => ({
           label: college.name,
           value: college.name,
@@ -65,7 +63,18 @@ const Main = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    const { name, whatsappNumber, email, gender, dayScholarOrHostler, areaOfResidence, collegeName, course, year, dob } = formData;
+    const {
+      name,
+      whatsappNumber,
+      email,
+      gender,
+      dayScholarOrHostler,
+      areaOfResidence,
+      collegeName,
+      course,
+      year,
+      dob,
+    } = formData;
 
     if (!name.trim()) newErrors.name = "Name is required";
     if (!dob) newErrors.dob = "Date of birth is required";
@@ -111,6 +120,8 @@ const Main = () => {
         description: "Registration Fee",
         order_id: orderData.id,
         handler: async (response) => {
+          console.log("Razorpay Response:", response);
+
           try {
             const verifyRes = await fetch("https://vrc-server-110406681774.asia-south1.run.app/api/verify-payment", {
               method: "POST",
@@ -128,35 +139,24 @@ const Main = () => {
             });
 
             const result = await verifyRes.json();
+            console.log("Verify Response:", result);
 
             if (result.status === "success") {
-              navigate('/thankyou');
               toast({
                 title: "Registration successful!",
                 status: "success",
                 duration: 5000,
                 isClosable: true,
               });
-              
-              setFormData({
-                serialNo: "",
-                name: "",
-                whatsappNumber: "",
-                email: "",
-                gender: "",
-                dayScholarOrHostler: "",
-                areaOfResidence: "",
-                collegeName: "",
-                course: "",
-                year: "",
-                dob: "",
-                amount: "9900",
-              });
-              
+
+              setTimeout(() => {
+                navigate("/thankyou");
+              }, 500);
             } else {
               throw new Error(result.message);
             }
           } catch (err) {
+            console.error("Verification error:", err);
             toast({
               title: "Payment verification failed",
               description: err.message || "Try again later",
