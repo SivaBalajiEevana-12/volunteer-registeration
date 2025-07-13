@@ -157,7 +157,7 @@ const Main = () => {
               }
             );
             const result = await verifyRes.json();
-            if (result.status === "success") {
+            if (result.message === "success") {
               toast({
                 title: "Registration Successful!",
                 description: "Your registration is confirmed.",
