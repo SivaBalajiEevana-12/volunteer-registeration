@@ -36,7 +36,7 @@ const Main = () => {
     course: "",
     year: "",
     dob: "",
-    amount: "100",
+    amount: "49.00",
   });
 
   const [errors, setErrors] = useState({});
@@ -107,7 +107,7 @@ const Main = () => {
       const orderRes = await fetch("https://vrc-server-110406681774.asia-south1.run.app/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: parseInt(formData.amount) }),
+        body: JSON.stringify({ amount: 4900 }),
       });
 
       const orderData = await orderRes.json();
@@ -143,27 +143,8 @@ const Main = () => {
             console.log("Verify Response:", result);
 
             if (result.status === "success") {
-              toast({
-                title: "Registration successful!",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-              });
-              setFormData({
-    serialNo: "",
-    name: "",
-    whatsappNumber: "",
-    email: "",
-    gender: "",
-    dayScholarOrHostler: "",
-    areaOfResidence: "",
-    collegeName: "",
-    course: "",
-    year: "",
-    dob: "",
-    amount: "4900",
-  })
-    navigate('/thankyou');      
+              setStatus(true);
+              navigate('/thankyou');      
             } else {
               throw new Error(result.message);
             }
@@ -188,6 +169,22 @@ const Main = () => {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
+       setFormData({ serialNo: "",
+    name: "",
+    whatsappNumber: "",
+    email: "",
+    gender: "",
+    dayScholarOrHostler: "",
+    areaOfResidence: "",
+    collegeName: "",
+    course: "",
+    year: "",
+    dob: "",
+    amount: "49.00",
+    })
+    if(status){
+      navigate('/thankyou')
+    }
     } catch (err) {
       toast({
         title: "Payment failed",
