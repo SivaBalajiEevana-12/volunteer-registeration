@@ -22,6 +22,7 @@ const Main = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [collegeOptions, setCollegeOptions] = useState([]);
+  const [status,setStatus]=useState(false);
 
   const [formData, setFormData] = useState({
     serialNo: "",
@@ -113,7 +114,7 @@ const Main = () => {
       if (!orderData.id) throw new Error("Order creation failed");
 
       const options = {
-        key: "rzp_test_kC99JKxEFoZUns",
+        key: "rzp_live_HBAc3tlMK0X5Xd",
         amount: orderData.amount,
         currency: "INR",
         name: "Event Registration",
@@ -148,10 +149,21 @@ const Main = () => {
                 duration: 5000,
                 isClosable: true,
               });
-
-              setTimeout(() => {
-                navigate("/thankyou");
-              }, 500);
+              setFormData({
+    serialNo: "",
+    name: "",
+    whatsappNumber: "",
+    email: "",
+    gender: "",
+    dayScholarOrHostler: "",
+    areaOfResidence: "",
+    collegeName: "",
+    course: "",
+    year: "",
+    dob: "",
+    amount: "4900",
+  })
+    navigate('/thankyou');      
             } else {
               throw new Error(result.message);
             }
