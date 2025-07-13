@@ -36,7 +36,7 @@ const Main = () => {
     course: "",
     year: "",
     dob: "",
-    amount: "9900",
+    amount: "1000",
   });
 
   const [errors, setErrors] = useState({});
@@ -287,7 +287,7 @@ const Main = () => {
         <FormErrorMessage>{errors.year}</FormErrorMessage>
       </FormControl>
 
-      <Text fontSize="xl" fontWeight="bold" mt={4}>Fee: ₹99.00</Text>
+      <Text fontSize="xl" fontWeight="bold" mt={4}>Fee: ₹49.00</Text>
 
       <Button mt={6} colorScheme="teal" onClick={handlePayment}>Pay & Register</Button>
     </Box>
