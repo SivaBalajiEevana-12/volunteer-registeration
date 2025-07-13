@@ -36,7 +36,7 @@ const Main = () => {
     course: "",
     year: "",
     dob: "",
-    amount: "1000",
+    amount: "100",
   });
 
   const [errors, setErrors] = useState({});
