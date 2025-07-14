@@ -118,7 +118,7 @@ export default function ThankYouPage() {
         >
           <Heading fontSize="2xl" mb={2}>🎉 Registration Successful!</Heading>
           <Text fontSize="lg" opacity={0.9}>
-            Welcome to Krishna Pulse Youth Fest 2024
+            Welcome to Krishna Pulse Youth Fest 2025
           </Text>
         </Box>
 
@@ -147,7 +147,8 @@ export default function ThankYouPage() {
                 <Icon as={Calendar} w={5} h={5} color="purple.600" />
                 <Box>
                   <Text fontWeight="semibold">Event Date</Text>
-                  <Text fontSize="sm" color="gray.600">August 19, 2024 (Janmashtami)</Text>
+                  {/* <Text fontSize="sm" color="gray.600">August 19, 2024 (Janmashtami)</Text>
+                   */}<Text fontSize="sm" color="gray.600">August 15, 2025</Text>
                 </Box>
               </Flex>
 
@@ -155,7 +156,8 @@ export default function ThankYouPage() {
                 <Icon as={MapPin} w={5} h={5} color="purple.600" />
                 <Box>
                   <Text fontWeight="semibold">Venue</Text>
-                  <Text fontSize="sm" color="gray.600">Main Auditorium, Campus Grounds</Text>
+                  {/* <Text fontSize="sm" color="gray.600">Main Auditorium, Campus Grounds</Text> */}
+                  <Text fontSize="sm" color="gray.600">Gadiraju Palace, Beach Road, Visakhapatnam</Text>
                 </Box>
               </Flex>
 
@@ -170,7 +172,7 @@ export default function ThankYouPage() {
               </Flex>
             </VStack>
 
-            <Box
+            {/* <Box
               bgGradient="linear(to-r, yellow.50, orange.50)"
               p={4}
               rounded="lg"
@@ -185,9 +187,9 @@ export default function ThankYouPage() {
                 <Text>• Join our WhatsApp group (link sent separately)</Text>
                 <Text>• Be on time at the venue</Text>
               </VStack>
-            </Box>
+            </Box> */}
 
-            <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
+            {/* <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
              <Button
   variant="outline"
   leftIcon={<Download />}
@@ -195,10 +197,14 @@ export default function ThankYouPage() {
 >
   Download Receipt
 </Button>
-              <Button variant="outline" leftIcon={<Share2 />}>
-                Share Event
-              </Button>
-            </SimpleGrid>
+              <Button
+  variant="outline"
+  leftIcon={<Share2 />}
+  onClick={() => window.open('https://youthfest.harekrishnavizag.org/', '_blank')}
+>
+  Share Registration Link
+</Button>
+            </SimpleGrid> */}
 
             <Box textAlign="center" p={4} bg="gray.100" rounded="lg">
               <Text fontSize="sm" fontWeight="semibold" mb={2}>Need Help?</Text>
