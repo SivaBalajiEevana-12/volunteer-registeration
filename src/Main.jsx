@@ -233,13 +233,14 @@
       <Box minH="100vh" bg="gray.50" py={8}>
         <Container maxW="2xl" px={4}>
           {/* Header */}
-          <Flex
-  direction={{ base: 'column', md: 'row' }}
+<Flex
+  direction="row"
   align="center"
   justify="center"
   gap={6}
   mb={8}
-  textAlign={{ base: 'center', md: 'left' }}
+  textAlign="left"
+  flexWrap="wrap" // optional: for very small screens
 >
   {/* Logo */}
   <Box
@@ -269,6 +270,7 @@
     </Text>
   </Box>
 </Flex>
+
 
 
           {/* Banner */}

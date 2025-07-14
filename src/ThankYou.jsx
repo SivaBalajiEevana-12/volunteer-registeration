@@ -88,10 +88,11 @@
 <Flex
   align="center"
   justify="center"
-  gap={6}
+  gap={4}
   mb={8}
-  direction={{ base: 'column', md: 'row' }}
-  textAlign={{ base: 'center', md: 'left' }}
+  direction="row"      // Always row
+  textAlign="left"     // Always left-aligned
+  flexWrap="wrap"      // Optional: Wrap text below image if very narrow screen
 >
   {/* Left: Logo with tick icon */}
   <Box position="relative" minW="96px">
@@ -115,7 +116,7 @@
   </Box>
 
   {/* Right: Title and subtitle */}
-  <Box>
+  <Box ml={2}>
     <Heading size="lg" color="black" fontWeight="bold" lineHeight="short">
       KRISHNA PULSE <br /> YOUTH FESTIVAL
     </Heading>
@@ -124,6 +125,7 @@
     </Text>
   </Box>
 </Flex>
+
 
 
 
