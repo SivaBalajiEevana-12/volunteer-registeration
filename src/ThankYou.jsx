@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import krishnaPulseLogo from '@/assets/krishna-pulse-logo.png';
+import krishnaPulseLogo from './component/image.png';
 
 export default function ThankYouPage() {
   const { id } = useParams();
