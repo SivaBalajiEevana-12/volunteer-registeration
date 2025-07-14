@@ -171,7 +171,7 @@
                   isClosable: true,
                   position: "top-right",
                 });
-                navigate("/thankyou");
+                navigate(`/thankyou/${response.razorpay_payment_id}`);
               } else {
                 throw new Error(result.message);
               }
