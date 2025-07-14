@@ -188,9 +188,13 @@ export default function ThankYouPage() {
             </Box>
 
             <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
-              <Button variant="outline" leftIcon={<Download />}>
-                Download Receipt
-              </Button>
+             <Button
+  variant="outline"
+  leftIcon={<Download />}
+  onClick={() => window.open(`https://vrc-server-110406681774.asia-south1.run.app/api/download-receipt/${candidate.paymentId}`, '_blank')}
+>
+  Download Receipt
+</Button>
               <Button variant="outline" leftIcon={<Share2 />}>
                 Share Event
               </Button>
