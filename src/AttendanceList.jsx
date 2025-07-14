@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Layout from "./component/Layout";
 
 const AttendanceList = () => {
   const [candidates, setCandidates] = useState([]);
@@ -37,6 +38,7 @@ const AttendanceList = () => {
   }, []);
 
   return (
+    <Layout>
     <Box maxW="6xl" mx="auto" mt={10} p={5}>
       <Flex justify="space-between" align="center" mb={6}>
         <Heading size="lg">✅ Attendance List</Heading>
@@ -74,6 +76,7 @@ const AttendanceList = () => {
         </Table>
       )}
     </Box>
+    </Layout>
   );
 };
 

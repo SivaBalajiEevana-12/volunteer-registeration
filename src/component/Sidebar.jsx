@@ -46,7 +46,7 @@ const Sidebar = () => {
         </Box>
     <Box
           as={Link}
-          to="/admin-1/attendance"
+          to="/admin-1/college"
           _hover={{ bg: "gray.700" }}
           p="3"
           borderRadius="md"
