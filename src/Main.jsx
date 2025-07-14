@@ -26,6 +26,7 @@
 
     InputLeftAddon,
     Image,
+    Flex,
   } from "@chakra-ui/react";
   import { CalendarIcon, TimeIcon, StarIcon } from "@chakra-ui/icons";
   import Select from "react-select";
@@ -232,45 +233,43 @@
       <Box minH="100vh" bg="gray.50" py={8}>
         <Container maxW="2xl" px={4}>
           {/* Header */}
-          <VStack spacing={4} textAlign="center" mb={6}>
-            <Box
-              w={20}
-              h={20}
-              mx="auto"
-              bg="white"
-              borderRadius="full"
-              shadow="lg"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-<Box
-  w={20}
-  h={20}
-  mx="auto"
-  bg="white"
-  borderRadius="full"
-  shadow="lg"
-  display="flex"
-  alignItems="center"
-  justifyContent="center"
-  overflow="hidden" // this ensures no overflow outside the circle
+          <Flex
+  direction={{ base: 'column', md: 'row' }}
+  align="center"
+  justify="center"
+  gap={6}
+  mb={8}
+  textAlign={{ base: 'center', md: 'left' }}
 >
-  <Image
-    src={image12}
-    alt="Krishna Pulse Logo"
-    width="100%"
-    height="100%"
-    objectFit="contain"
-  />
-</Box>
+  {/* Logo */}
+  <Box
+    boxSize={{ base: '120px', md: '150px' }}
+    borderRadius="full"
+    overflow="hidden"
+    shadow="md"
+    border="2px solid #ccc"
+    flexShrink={0}
+  >
+    <Image
+      src={image12}
+      alt="Krishna Pulse Logo"
+      objectFit="cover"
+      width="100%"
+      height="100%"
+    />
+  </Box>
 
-            </Box>
-            <Heading size="2xl" color="gray.800">
-              Krishna Pulse <Text as="span" color="gold.600">Youth Fest</Text>
-            </Heading>
-            <Text color="teal.600">Janmashtami Celebration 2024</Text>
-          </VStack>
+  {/* Title and Tagline */}
+  <Box>
+    <Heading fontSize={{ base: '2xl', md: '3xl' }} color="black" fontWeight="bold">
+      KRISHNA PULSE <br /> YOUTH FESTIVAL
+    </Heading>
+    <Text fontSize={{ base: 'md', md: 'lg' }} color="gray.700" fontWeight="semibold" mt={2}>
+      A Fest of Fun, Faith & Freedom
+    </Text>
+  </Box>
+</Flex>
+
 
           {/* Banner */}
           <Box mb={8} bgGradient="linear(to-r, teal.600, gold.500)" color="white" p={4} borderRadius="lg" textAlign="center">
