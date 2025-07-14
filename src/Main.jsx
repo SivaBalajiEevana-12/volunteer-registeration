@@ -428,7 +428,7 @@
   </FormControl>
 )}
 
-
+  {formData.CollegeOrWorking === "College" && (
                 <FormControl isInvalid={!!errors.course}>
                   <FormLabel>Course <Text as="span" color="red.500">*</Text></FormLabel>
                   <Input
@@ -440,7 +440,7 @@
                   />
                   <FormErrorMessage>{errors.course}</FormErrorMessage>
                 </FormControl>
-
+)}
     {formData.CollegeOrWorking === "College" && (
     <FormControl isInvalid={!!errors.year}>
       <FormLabel>Year <Text as="span" color="red.500">*</Text></FormLabel>
