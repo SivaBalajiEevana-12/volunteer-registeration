@@ -1,106 +1,253 @@
-import React, { useEffect, useState } from "react";
-import { Box, Heading, Text, Button, VStack, Spinner } from "@chakra-ui/react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Icon,
+  Image,
+  Link,
+  Stack,
+  Text,
+  VStack,
+  Spinner,
+  HStack,
+  SimpleGrid,
+} from '@chakra-ui/react';
+import {
+  CheckCircle,
+  Calendar,
+  MapPin,
+  Phone,
+  Mail,
+  ArrowLeft,
+  Download,
+  Share2,
+} from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import krishnaPulseLogo from '@/assets/krishna-pulse-logo.png';
 
-const ThankYou = () => {
-  const { id } = useParams(); // Get payment ID from URL
+export default function ThankYouPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState("loading"); // loading | success | invalid | error
+
+  const [status, setStatus] = useState('loading'); // 'loading', 'success', 'invalid', 'error'
   const [candidate, setCandidate] = useState(null);
 
   useEffect(() => {
     const verifyPayment = async () => {
       try {
-        const res = await axios.get(`/api/verify-payment/${id}`);
+        const res = await axios.get(`https://vrc-server-110406681774.asia-south1.run.app/api/verify-payment/${id}`);
         if (res.data.success) {
           setCandidate(res.data.candidate);
-          setStatus("success");
+          setStatus('success');
         } else {
-          setStatus("invalid");
+          setStatus('invalid');
         }
       } catch (err) {
-        setStatus("error");
+        setStatus('error');
       }
     };
 
-    verifyPayment();
+    if (id) verifyPayment();
   }, [id]);
 
-  const renderContent = () => {
-    if (status === "loading") {
-      return <Spinner size="xl" color="teal.500" />;
-    }
-
-    if (status === "invalid") {
-      return (
-        <>
-          <Heading size="lg" color="red.500">Invalid Payment</Heading>
-          <Text>This payment ID is not valid or doesn't match any registration.</Text>
-        </>
-      );
-    }
-
-    if (status === "error") {
-      return (
-        <>
-          <Heading size="lg" color="orange.500">Server Error</Heading>
-          <Text>Something went wrong while verifying your payment. Please try again later.</Text>
-        </>
-      );
-    }
-
+  if (status === 'loading') {
     return (
-      <>
-        <Heading size="lg" color="teal.600">
-          🎉 Registration Successful!
-        </Heading>
-        <Text fontSize="lg">
-          Thank you, {candidate.name}. We’ve received your details and payment.
-        </Text>
-        <Text color="gray.500" fontSize="md">
-          Payment ID: {candidate.paymentId}
-        </Text>
-        <Text color="gray.500" fontSize="md">
-          Amount Paid: ₹{candidate.paymentAmount}
-        </Text>
-        <Text color="gray.500" fontSize="md">
-          You’ll receive event updates on WhatsApp and email.
-        </Text>
-      </>
+      <Center minH="100vh" bg="gray.50">
+        <Spinner size="xl" color="teal.500" />
+      </Center>
     );
-  };
+  }
+
+  if (status === 'invalid' || status === 'error') {
+    return (
+      <Box textAlign="center" mt={20} p={6}>
+        <VStack spacing={4}>
+          <Heading size="lg" color={status === 'invalid' ? 'red.500' : 'orange.500'}>
+            {status === 'invalid' ? 'Invalid Payment' : 'Server Error'}
+          </Heading>
+          <Text>
+            {status === 'invalid'
+              ? "This payment ID is not valid or doesn't match any registration."
+              : 'Something went wrong while verifying your payment. Please try again later.'}
+          </Text>
+          <Button colorScheme="teal" onClick={() => navigate('/')}>
+            Go Back to Home
+          </Button>
+        </VStack>
+      </Box>
+    );
+  }
 
   return (
-    <Box
-      minH="100vh"
-      bg="gray.50"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      p={6}
-    >
-      <VStack
-        spacing={6}
-        p={10}
-        bg="white"
-        boxShadow="lg"
-        borderRadius="2xl"
-        maxW="500px"
-        textAlign="center"
-      >
-        {renderContent()}
+    <Box minH="100vh" bgGradient="linear(to-br, orange.100, yellow.100)" py={8} px={4}>
+      <Box maxW="2xl" mx="auto">
+        <Center mb={8}>
+          <Box position="relative">
+            <Image
+              src={krishnaPulseLogo}
+              alt="Krishna Pulse Youth Fest Logo"
+              boxSize="96px"
+              rounded="full"
+              shadow="lg"
+            />
+            <Center
+              position="absolute"
+              top="-2"
+              right="-2"
+              bg="green.500"
+              rounded="full"
+              p={1}
+            >
+              <Icon as={CheckCircle} w={6} h={6} color="white" />
+            </Center>
+          </Box>
+        </Center>
 
-        <Button
-          colorScheme="teal"
-          size="md"
-          onClick={() => navigate("/")}
+        <Box
+          bgGradient="linear(to-r, purple.500, pink.500)"
+          color="white"
+          p={6}
+          rounded="lg"
+          shadow="xl"
+          textAlign="center"
+          mb={6}
         >
-          Go Back to Home
-        </Button>
-      </VStack>
+          <Heading fontSize="2xl" mb={2}>🎉 Registration Successful!</Heading>
+          <Text fontSize="lg" opacity={0.9}>
+            Welcome to Krishna Pulse Youth Fest 2024
+          </Text>
+        </Box>
+
+        {candidate && (
+          <Box bg="white" p={4} rounded="lg" shadow="md" mb={6}>
+            <Text fontWeight="bold" color="purple.600" mb={1}>
+              Thank you, {candidate.name}!
+            </Text>
+            <Text fontSize="sm" color="gray.600">
+              We've received your payment of ₹{candidate.paymentAmount}
+            </Text>
+            <Text fontSize="sm" color="gray.500">Payment ID: {candidate.paymentId}</Text>
+          </Box>
+        )}
+
+        <Box bg="white" p={6} rounded="lg" shadow="lg" mb={6}>
+          <Stack spacing={6}>
+            <Box textAlign="center">
+              <Heading size="md" color="purple.600" mb={2}>
+                Your Registration is Confirmed!
+              </Heading>
+            </Box>
+
+            <VStack spacing={4} align="stretch">
+              <Flex align="center" gap={3} p={3} bg="purple.50" rounded="lg">
+                <Icon as={Calendar} w={5} h={5} color="purple.600" />
+                <Box>
+                  <Text fontWeight="semibold">Event Date</Text>
+                  <Text fontSize="sm" color="gray.600">August 19, 2024 (Janmashtami)</Text>
+                </Box>
+              </Flex>
+
+              <Flex align="center" gap={3} p={3} bg="purple.50" rounded="lg">
+                <Icon as={MapPin} w={5} h={5} color="purple.600" />
+                <Box>
+                  <Text fontWeight="semibold">Venue</Text>
+                  <Text fontSize="sm" color="gray.600">Main Auditorium, Campus Grounds</Text>
+                </Box>
+              </Flex>
+
+              <Flex align="center" gap={3} p={3} bg="purple.50" rounded="lg">
+                <Icon as={Phone} w={5} h={5} color="purple.600" />
+                <Box>
+                  <Text fontWeight="semibold">WhatsApp Updates</Text>
+                  <Text fontSize="sm" color="gray.600">
+                    You'll receive event updates and group links on WhatsApp
+                  </Text>
+                </Box>
+              </Flex>
+            </VStack>
+
+            <Box
+              bgGradient="linear(to-r, yellow.50, orange.50)"
+              p={4}
+              rounded="lg"
+              border="2px solid"
+              borderColor="yellow.400"
+            >
+              <Text fontWeight="semibold" color="purple.600" mb={2}>
+                Next Steps:
+              </Text>
+              <VStack spacing={1} align="start" fontSize="sm" color="gray.600">
+                <Text>• Save your payment receipt</Text>
+                <Text>• Join our WhatsApp group (link sent separately)</Text>
+                <Text>• Be on time at the venue</Text>
+              </VStack>
+            </Box>
+
+            <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
+              <Button variant="outline" leftIcon={<Download />}>
+                Download Receipt
+              </Button>
+              <Button variant="outline" leftIcon={<Share2 />}>
+                Share Event
+              </Button>
+            </SimpleGrid>
+
+            <Box textAlign="center" p={4} bg="gray.100" rounded="lg">
+              <Text fontSize="sm" fontWeight="semibold" mb={2}>Need Help?</Text>
+              <HStack justify="center" spacing={4} fontSize="sm">
+                <Link
+                  href="mailto:krishnapulse@gmail.com"
+                  color="purple.600"
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                >
+                  <Icon as={Mail} w={4} h={4} />
+                  Email Support
+                </Link>
+                <Link
+                  href="tel:+919876543210"
+                  color="purple.600"
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                >
+                  <Icon as={Phone} w={4} h={4} />
+                  Call Us
+                </Link>
+              </HStack>
+            </Box>
+          </Stack>
+        </Box>
+
+        <Center>
+          <Button
+            onClick={() => navigate('/')}
+            variant="ghost"
+            leftIcon={<ArrowLeft />}
+          >
+            Register Another Participant
+          </Button>
+        </Center>
+
+        <Box
+          textAlign="center"
+          mt={8}
+          p={4}
+          bgGradient="linear(to-r, purple.500, pink.500)"
+          color="white"
+          rounded="lg"
+        >
+          <Text fontWeight="semibold" mb={1}>🙏 Radhe Krishna! 🙏</Text>
+          <Text fontSize="sm" opacity={0.9}>
+            We're excited to celebrate Janmashtami with you!
+          </Text>
+        </Box>
+      </Box>
     </Box>
   );
-};
-
-export default ThankYou;
+}
