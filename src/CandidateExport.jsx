@@ -148,9 +148,12 @@ const CandidateExport = () => {
           <Tr>
             <Th>Name</Th>
             <Th>Gender</Th>
-            <Th>College/Working</Th>
+            <Th>College</Th>
             <Th>Phone</Th>
             <Th>Payment</Th>
+            <Th>College/Working</Th>
+            <Th>Slot</Th>
+            
             <Th>Registration Date</Th>
           </Tr>
         </Thead>
@@ -163,6 +166,7 @@ const CandidateExport = () => {
               <Td>{candidate.whatsappNumber}</Td>
               <Td>{candidate.paymentStatus}</Td>
               <Td>{candidate.collegeOrWorking}</Td>
+              <Td>{candidate.slot}</Td>
               <Td>
                 {candidate.registrationDate
                   ? new Date(candidate.registrationDate).toLocaleDateString()
