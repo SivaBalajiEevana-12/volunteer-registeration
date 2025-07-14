@@ -4,6 +4,7 @@ import {
   Box, Input, Button, VStack, HStack, Text, useToast
 } from '@chakra-ui/react';
 import axios from 'axios';
+import Layout from './component/Layout';
 
 const API_URL = 'https://vrc-server-110406681774.asia-south1.run.app/college'; // adjust if different
 
@@ -58,6 +59,7 @@ const CollegeManager = () => {
   }, []);
 
   return (
+    <Layout>
     <Box maxW="500px" mx="auto" mt={10} p={5} borderWidth={1} borderRadius="lg">
       <VStack spacing={4}>
         <Input
@@ -86,6 +88,7 @@ const CollegeManager = () => {
         </Box>
       </VStack>
     </Box>
+    </Layout>
   );
 };
 

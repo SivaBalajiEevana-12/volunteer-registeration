@@ -9,6 +9,7 @@ import {
   FormErrorMessage,
   useToast,
 } from "@chakra-ui/react";
+import Layout from "./component/Layout";
 
 const Attendence = () => {
   const [phone, setPhone] = useState("");
@@ -63,6 +64,7 @@ const Attendence = () => {
   };
 
   return (
+    <Layout>
     <Box maxW="400px" mx="auto" mt={20} p={6} borderWidth="1px" borderRadius="lg" boxShadow="md">
       <Heading mb={6} size="md" textAlign="center">Mark Attendance</Heading>
 
@@ -80,6 +82,7 @@ const Attendence = () => {
         Mark Attendance
       </Button>
     </Box>
+    </Layout>
   );
 };
 

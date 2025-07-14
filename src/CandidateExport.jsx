@@ -19,6 +19,7 @@ import {
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { useNavigate } from "react-router-dom";
+import Layout from "./component/Layout";
 
 const CandidateExport = () => {
   const [data, setData] = useState([]);
@@ -40,7 +41,7 @@ const CandidateExport = () => {
         setLoading(false);
       });
   }, []);
-
+  console.log(data)
   const filterByDate = (candidate) => {
     if (!startDate && !endDate) return true;
 
@@ -91,9 +92,10 @@ const CandidateExport = () => {
   };
 
   if (loading)
-    return <Spinner size="xl" mt="20" ml="auto" mr="auto" display="block" />;
+    return (<Layout><Spinner size="xl" mt="20" ml="auto" mr="auto" display="block" /></Layout>);
 
   return (
+    <Layout>
     <Box p={6}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
         <Heading size="lg">Candidate List</Heading>
@@ -171,6 +173,7 @@ const CandidateExport = () => {
         </Tbody>
       </Table>
     </Box>
+    </Layout>
   );
 };
 
