@@ -34,24 +34,35 @@ const Attendence = () => {
 
       const data = await res.json();
 
-      if (res.ok) {
-        toast({
-          title: "Attendance marked!",
-          description: `Marked for ${data.name}`,
-          status: "success",
-          duration: 4000,
-          isClosable: true,
-        });
-        setPhone("");
-      } else {
-        toast({
-          title: "Error",
-          description: data.message || "Could not mark attendance",
-          status: "error",
-          duration: 4000,
-          isClosable: true,
-        });
-      }
+if (res.ok) {
+  if (data.status === "already-marked") {
+    toast({
+      title: "Already Marked",
+      description: data.message || "Attendance has already been marked.",
+      status: "info",
+      duration: 4000,
+      isClosable: true,
+    });
+  } else {
+    toast({
+      title: "Already Attendance marked!",
+      description: `Marked for ${data.name}`,
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+    });
+    setPhone("");
+  }
+} else {
+  toast({
+    title: "Error",
+    description: data.message || "Could not mark attendance",
+    status: "error",
+    duration: 4000,
+    isClosable: true,
+  });
+}
+
     } catch (err) {
       toast({
         title: "Server error",
