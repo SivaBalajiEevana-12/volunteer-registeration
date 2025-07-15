@@ -28,7 +28,7 @@ function App() {
       <Route path='/' element={<Main/>}/>
       <Route path='/admin-1/college' element={<CollegeManager/>}/>
       <Route path='/thankyou/:id' element= {<ThankYou />}/>
-      <Route path='/attendence' element= {<Attendence/>}/>
+      <Route path='/attendance' element= {<Attendence/>}/>
       <Route path='/admin-1' element={<CandidateExport/>}/>
       <Route path='/admin-1/attendance' element={<AttendanceList/>}/>
       
