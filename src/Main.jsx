@@ -305,7 +305,7 @@ const Main = () => {
             <Box w={12} h={12} bg="orange.100" borderRadius="full" display="flex" alignItems="center" justifyContent="center">
               <TimeIcon color="orange.600" boxSize={6} />
             </Box>
-            <Text fontSize="sm" fontWeight="medium">Full Day Event</Text>
+            <Text fontSize="sm" fontWeight="medium">2 Hours Event</Text>
           </VStack>
         </HStack>
         {/* Form */}
