@@ -148,7 +148,7 @@ const CandidateExport = () => {
           <Tr>
             <Th>Name</Th>
             <Th>Gender</Th>
-            <Th>College</Th>
+            <Th>Course</Th>
             <Th>Phone</Th>
             <Th>Payment</Th>
             <Th>College/Working</Th>
@@ -162,7 +162,7 @@ const CandidateExport = () => {
             <Tr key={idx}>
               <Td>{candidate.name}</Td>
               <Td>{candidate.gender}</Td>
-              <Td>{candidate.college}</Td>
+              <Td>{candidate.course}</Td>
               <Td>{candidate.whatsappNumber}</Td>
               <Td>{candidate.paymentStatus}</Td>
               <Td>{candidate.collegeOrWorking}</Td>
